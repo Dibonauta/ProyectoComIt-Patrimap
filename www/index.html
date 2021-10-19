@@ -10,7 +10,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
@@ -96,6 +96,27 @@
             </div>
         </div>
     </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>--> 
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCLVKMKDZMzfk8pE8z3Mq5EC7xDIXcakdo",
+            authDomain: "patrimaps-proyecto-comit.firebaseapp.com",
+            projectId: "patrimaps-proyecto-comit",
+            storageBucket: "patrimaps-proyecto-comit.appspot.com",
+            messagingSenderId: "518547636296",
+            appId: "1:518547636296:web:b07c2ad4bc9d51ea15587d"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+  
 
 
     <script type="text/javascript" src="cordova.js"></script>
