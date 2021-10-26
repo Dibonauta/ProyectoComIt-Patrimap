@@ -2,7 +2,7 @@
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 var map, platform;
-var pos, latitud, longitud;
+var pos, latitud, longitud; 
 var app = new Framework7({
     // App root element
     root: '#app',
@@ -29,9 +29,6 @@ var mainView = app.views.create('.view-main');
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!"); 
-    platform = new H.service.Platform({
-      'apikey': '{jxHbNasTU-AJ9dPFrehNs5dC7JtDW7hz-KjaiKcSb-0}'
-    });
 });
 
 // Option 1. Using one 'page:init' handler for all pages
@@ -44,12 +41,15 @@ $$(document).on('page:init', function (e) {
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     // Do something here when page with data-name="index" attribute loaded and initialized
      
+    platform = new H.service.Platform({
+      'apikey': '{jxHbNasTU-AJ9dPFrehNs5dC7JtDW7hz-KjaiKcSb-0}'
+    });
 
     var defaultLayers = platform.createDefaultLayers();
 	    // Instantiate (and display) a map object:
 	    map = new H.Map(
           document.getElementById('mapContainer'),
-    	  defaultLayers.vector.normal.map,
+    	  defaultLayers.raster.satellite.xbase,
     	  {
       	  zoom: 14,
       	  center: { lat: latitud, lng: longitud }
