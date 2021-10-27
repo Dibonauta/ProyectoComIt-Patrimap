@@ -44,7 +44,8 @@ $$(document).on('page:init', function (e) {
 // Option 2. Using live 'page:init' event handlers for each page
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     // Do something here when page with data-name="index" attribute loaded and initialized
-     
+ 
+    //Mapa
     platform = new H.service.Platform({
       'apikey': 'jxHbNasTU-AJ9dPFrehNs5dC7JtDW7hz-KjaiKcSb-0'
     });
