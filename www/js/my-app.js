@@ -66,9 +66,28 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     	  map.addObject(marker);
       	map.setCenter(coords); 
 
+        //Movimiento del mapa
         var mapEvents = new H.mapevents.MapEvents(map);
-
         var behavior = new H.mapevents.Behavior(mapEvents); 
+        
+        //UI del mapa
         var ui = H.ui.UI.createDefault(map, defaultLayers, 'es-ES');
+
+        var mapSettings = ui.getControl('mapsettings');
+        var zoom = ui.getControl('zoom');
+        var scalebar = ui.getControl('scalebar'); 
+
+        mapSettings.setAlignment('top-right');
+        zoom.setAlignment('right-middle'); 
+        
+        
+        //iconos del mapa
+        var icon = new H.map.Icon('img/icono1.png')
+          
+        var marker = new H.map.Marker({ lat: -32.845811, lng: -61.248997 }, {icon: icon});
+        
+        map.addObject(marker);
+        
+        
         
 })

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html> 
-<head>
+<html class="theme-dark"> 
+<head>  
     <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
@@ -17,7 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="msapplication-tap-highlight" content="no"> 
+    <meta name="viewport" content="initial-scale=1.0,width=device-width" />
     <!-- Color theme for statusbar -->
     <!-- <meta name="theme-color" content="#2196f3"> -->
     <meta name="color-scheme" content="light dark">
@@ -34,10 +35,6 @@
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
-    
-    <meta name="viewport" content="initial-scale=1.0,width=device-width" />
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
 
@@ -73,16 +70,15 @@
         <!-- Initial Page, "data-name" contains page name -->
             <div data-name="index" class="page">
                 <!-- Scrollable page content -->
-                <div class="page-content">
+                <div class="page-content medidas">
                     <div class="block">
-                        <p>Mapa</p>
                         <!-- Link to another page --> 
-                        <div style="width: 100%; height: 80vh; border:2px solid #000;" id="mapContainer"></div>
+                        <div style="width: 100%; height: 75vh; border:2px outset #000;" id="mapContainer"></div>
 
-                        <a href="/about/" data-view=".page-content">About app</a>
+                        <!--<a href="/about/" data-view=".page-content">About app</a>-->
 
                         <!-- In data-popup attribute we specify CSS selector of popup we need to open -->
-                        <p><a href="#" data-popup=".my-popup" class="popup-open">Open Popup</a></p>
+                        <!--<p><a href="#" data-popup=".my-popup" class="popup-open">Open Popup</a></p>-->
 
                         <!-- And somewhere in DOM -->
                         <div class="popup my-popup">
