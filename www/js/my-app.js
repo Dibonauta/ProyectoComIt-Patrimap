@@ -107,7 +107,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
             });
             // show info bubble
             ui.addBubble(bubble);
-          }, true);        
+          }, false);        
           
           //Museos
           agregarmarcadoralgrupo(grupo, {lat:-32.845811, lng:-61.248997}, {icon: iconoMuseo},
