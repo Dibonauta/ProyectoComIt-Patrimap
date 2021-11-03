@@ -126,7 +126,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
             perRef.get()
               .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
-                console.log("data:" + doc.data().name);
+                console.log("data:" + doc.data(grupo).name);
                 });
               })
               .catch(function(error) {
@@ -137,10 +137,10 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
          
         } 
 
-        function agregarmarcadoralgrupo(grupo, coordinate, html){
-          var marcadorG = new H.map.Marker(coordinate, {icon: iconoMuseo}); 
-          grupo.addObject(marcadorG); 
-          marcadorG.setData(html);
+        function agregarmuseo(grupo, coordinate, html){
+          var marcadorM = new H.map.Marker(coordinate, {icon: iconoMuseo}); 
+          grupo.addObject(marcadorM); 
+          marcadorM.setData(html);
         }  
         marcadores(map);
         
