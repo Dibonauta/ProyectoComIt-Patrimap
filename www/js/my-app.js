@@ -126,7 +126,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
             perRef.get()
               .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
-                console.log("data:" + doc.data(grupo).name);
+                console.log("data:" + JSON.stringify(doc.data().Link) + JSON.stringify(doc.data().Localizacion) + JSON.stringify(doc.data().Nombre) + JSON.stringify(doc.data().Ubicacion));
                 });
               })
               .catch(function(error) {
