@@ -88,8 +88,9 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
           
         //var marker = new H.map.Marker({ lat: -32.845811, lng: -61.248997 }, {icon: icon});
         
-        map.addObject(marker); 
-
+        //map.addObject(marker); 
+        
+        //content: "--" + evt.target.getData()
 
         //A ver que sale
         function marcadores(map){
@@ -100,25 +101,40 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
           grupo.addEventListener('tap', function (evt) {
             // event target is the marker itself, group is a parent event target
+            console.log(evt.target.getData())
             // for all objects that it contains
             var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
-              // read custom data
-              content: evt.target.getData()
+              // read custom data 
+
+              content: evt.target.getData() 
             });
             // show info bubble
             ui.addBubble(bubble);
           }, false);        
           
           //Museos
-          agregarmarcadoralgrupo(grupo, {lat:-32.845811, lng:-61.248997}, {icon: iconoMuseo},
-            '<div><a href="https://www.facebook.com/museo.correa/">Museo Correa "Villa Angela"</a></div>' +
-            '<div>Correa, Santa Fe</div>'); 
           
-          agregarmarcadoralgrupo(grupo, {lat:-32.954380, lng:-60.656858}, {icon: iconoMuseo},
+          /*/agregarmarcadoralgrupo(grupo, {lat:-32.845811, lng:-61.248997},
+            '<div><a class="external" target="_blank" href="https://www.facebook.com/museo.correa/">Museo Correa "Villa Angela"</a></div>' +
+            '<div>Correa, Santa Fe</div>');
+          
+          agregarmarcadoralgrupo(grupo, {lat:-32.954380, lng:-60.656858},
             '<div><a href="https://www.liverpoolfc.tv">Liverpool</a></div>' +
-            '<div>Rosario, Santa Fe</div>');
-          
-          agregarmarcadoralgrupo(grupo, {lat:-32.956231, lng:-60.659858}, {icon: iconoMuseo});
+            '<div>Rosario, Santa Fe</div>');/*/
+            var db = firebase.firestore();
+            var perRef = db.collection("Museos");
+            perRef.get()
+              .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                console.log("data:" + doc.data().name);
+                });
+              })
+              .catch(function(error) {
+
+               console.log("Error: " , error);
+
+              });
+         
         } 
 
         function agregarmarcadoralgrupo(grupo, coordinate, html){
