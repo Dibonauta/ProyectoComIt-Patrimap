@@ -92,7 +92,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
         
         //content: "--" + evt.target.getData()
 
-        //A ver que sale
+        //Museos
         function marcadores(map){
 
           var grupo = new H.map.Group(); 
@@ -126,24 +126,23 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
             perRef.get()
               .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
-                console.log("data:" + JSON.stringify(doc.data().Link));
-                console.log("data:" + JSON.stringify(doc.data().Latitud)); 
-                console.log("data:" + JSON.stringify(doc.data().Longitud)); 
-                console.log("data:" + JSON.stringify(doc.data().Nombre));
-                console.log("data:" + JSON.stringify(doc.data().Ubicacion)); 
+                console.log("Enlace:" + doc.data().Link);
+                console.log("Latitud:" + doc.data().Latitud); 
+                console.log("Longitud:" + doc.data().Longitud); 
+                console.log("Nombre:" + doc.data().Nombre);
+                console.log("Ubicacion:" + doc.data().Ubicacion); 
 
-                enlace = JSON.stringify(doc.data().Link);
-                ns = JSON.stringify(doc.data().Latitud); 
-                eo = JSON.stringify(doc.data().Longitud); 
-                nom = JSON.stringify(doc.data().Nombre);
-                ubi = JSON.stringify(doc.data().Ubicacion);
-              }); 
-              
-              
-              
-              agregarmuseo(grupo, {lat: ns, lng: eo},
-                '<div><a class="external" target="_blank" href="'+enlace+'">'+nom+'</a></div>' +
-                '<div>'+ubi+'</div>');
+                enlace = doc.data().Link;
+                ns = doc.data().Latitud; 
+                eo = doc.data().Longitud; 
+                nom = doc.data().Nombre;   
+                ubi = doc.data().Ubicacion; 
+
+                agregarmuseo(grupo, {lat: ns, lng: eo},
+                  '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
+                  '<div>'+ ubi +'</div>'); 
+               }); 
+            
               })
               .catch(function(error) {
 
@@ -157,7 +156,68 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
           grupo.addObject(marcadorM); 
           marcadorM.setData(html);
         }  
-        marcadores(map);
+        marcadores(map); 
+
+
+
+
+        //Parques Nacionales
+        function marcadores1(map){
+
+          var grupopn = new H.map.Group(); 
+
+          map.addObject(grupopn);  
+
+          grupopn.addEventListener('tap', function (evt) {
+            // event target is the marker itself, group is a parent event target
+            console.log(evt.target.getData())
+            // for all objects that it contains
+            var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+              // read custom data 
+
+              content: evt.target.getData() 
+            });
+            // show info bubble
+            ui.addBubble(bubble);
+          }, false);        
+          
+          //Parques Nacionales
+            var db = firebase.firestore();
+            var perRef = db.collection("Parques Nacionales");
+            perRef.get()
+              .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                console.log("Enlace:" + doc.data().Link);
+                console.log("Latitud:" + doc.data().Latitud); 
+                console.log("Longitud:" + doc.data().Longitud); 
+                console.log("Nombre:" + doc.data().Nombre);
+                console.log("Ubicacion:" + doc.data().Ubicacion); 
+
+                enlace = doc.data().Link;
+                ns = doc.data().Latitud; 
+                eo = doc.data().Longitud; 
+                nom = doc.data().Nombre;   
+                ubi = doc.data().Ubicacion; 
+
+                agregarpn(grupopn, {lat: ns, lng: eo},
+                  '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
+                  '<div>'+ ubi +'</div>'); 
+               }); 
+            
+              })
+              .catch(function(error) {
+
+               console.log("Error: " , error); 
+              });
+         
+        } 
+
+        function agregarpn(grupopn, coordinate, html){
+          var marcadorPN = new H.map.Marker(coordinate, {icon: iconoMuseo}); 
+          grupopn.addObject(marcadorPN); 
+          marcadorPN.setData(html);
+        }  
+        marcadores1(map);
         
         
         
