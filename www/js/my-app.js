@@ -3,8 +3,6 @@
 var $$ = Dom7;
 var map, platform;
 var pos, latitud, longitud; 
-latitud= -32.84
-longitud= -61.25
 var behavior 
 var ui
 var app = new Framework7({
@@ -33,18 +31,44 @@ var mainView = app.views.create('.view-main');
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!"); 
-});
+    var onSuccess = function(position) {
+      /*/console.log('Latitude: '          + position.coords.latitude          + '\n' +
+            'Longitude: '         + position.coords.longitude         + '\n' +
+            'Altitude: '          + position.coords.altitude          + '\n' +
+            'Accuracy: '          + position.coords.accuracy          + '\n' +
+            'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+            'Heading: '           + position.coords.heading           + '\n' +
+            'Speed: '             + position.coords.speed             + '\n' +
+            'Timestamp: '         + position.timestamp                + '\n');/*/
+            
+            latitud = position.coords.latitude
+            longitud = position.coords.longitude 
+            fnPuntosMapa()
+  };
+
+  // onError Callback receives a PositionError object
+  //
+  function onError(error) {
+      alert('code: '    + error.code    + '\n' +
+            'message: ' + error.message + '\n');
+  }
+
+  navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  });
 
 // Option 1. Using one 'page:init' handler for all pages
 $$(document).on('page:init', function (e) {
     // Do something here when page loaded and initialized
-    console.log(e); 
+    console.log(e);  
 })
 
 // Option 2. Using live 'page:init' event handlers for each page
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     // Do something here when page with data-name="index" attribute loaded and initialized
- 
+           
+}) 
+
+function fnPuntosMapa(){
     //Mapa
     platform = new H.service.Platform({
       'apikey': 'jxHbNasTU-AJ9dPFrehNs5dC7JtDW7hz-KjaiKcSb-0'
@@ -52,11 +76,12 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
     var defaultLayers = platform.createDefaultLayers();
 	    // Instantiate (and display) a map object:
-	    map = new H.Map(
+      
+      map = new H.Map(
           document.getElementById('mapContainer'),
     	  defaultLayers.raster.satellite.base,
-    	  {
-      	  zoom: 5,
+    	  { 
+      	  zoom: 14,
       	  center: { lat: latitud, lng: longitud }
           });
 
@@ -219,6 +244,4 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
         }  
         marcadores1(map);
         
-        
-        
-})
+}
