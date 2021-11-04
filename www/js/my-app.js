@@ -126,13 +126,28 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
             perRef.get()
               .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
-                console.log("data:" + JSON.stringify(doc.data().Link) + JSON.stringify(doc.data().Localizacion) + JSON.stringify(doc.data().Nombre) + JSON.stringify(doc.data().Ubicacion));
-                });
+                console.log("data:" + JSON.stringify(doc.data().Link));
+                console.log("data:" + JSON.stringify(doc.data().Latitud)); 
+                console.log("data:" + JSON.stringify(doc.data().Longitud)); 
+                console.log("data:" + JSON.stringify(doc.data().Nombre));
+                console.log("data:" + JSON.stringify(doc.data().Ubicacion)); 
+
+                enlace = JSON.stringify(doc.data().Link);
+                ns = JSON.stringify(doc.data().Latitud); 
+                eo = JSON.stringify(doc.data().Longitud); 
+                nom = JSON.stringify(doc.data().Nombre);
+                ubi = JSON.stringify(doc.data().Ubicacion);
+              }); 
+              
+              
+              
+              agregarmuseo(grupo, {lat: ns.val(), lng: eo.val()},
+                '<div><a class="external" target="_blank" href="'+enlace.val()+'">'+nom.val()+'</a></div>' +
+                '<div>'+ubi.val()+'</div>');
               })
               .catch(function(error) {
 
-               console.log("Error: " , error);
-
+               console.log("Error: " , error); 
               });
          
         } 
