@@ -141,9 +141,9 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
               
               
               
-              agregarmuseo(grupo, {lat: ns.val(), lng: eo.val()},
-                '<div><a class="external" target="_blank" href="'+enlace.val()+'">'+nom.val()+'</a></div>' +
-                '<div>'+ubi.val()+'</div>');
+              agregarmuseo(grupo, {lat: ns, lng: eo},
+                '<div><a class="external" target="_blank" href="'+enlace+'">'+nom+'</a></div>' +
+                '<div>'+ubi+'</div>');
               })
               .catch(function(error) {
 
