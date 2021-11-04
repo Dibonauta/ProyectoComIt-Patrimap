@@ -85,7 +85,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
         //iconos del mapa
         var icon = new H.map.Icon('img/icono1.png') 
         var iconoMuseo = new H.map.Icon('img/iconomuseo.png')
-          
+        var iconoPn = new H.map.Icon('img/iconopn.png')
         //var marker = new H.map.Marker({ lat: -32.845811, lng: -61.248997 }, {icon: icon});
         
         //map.addObject(marker); 
@@ -213,7 +213,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
         } 
 
         function agregarpn(grupopn, coordinate, html){
-          var marcadorPN = new H.map.Marker(coordinate, {icon: iconoMuseo}); 
+          var marcadorPN = new H.map.Marker(coordinate, {icon: iconoPn}); 
           grupopn.addObject(marcadorPN); 
           marcadorPN.setData(html);
         }  
