@@ -165,14 +165,14 @@ function fnPuntosMapa(){
 
                 agregarmuseo(grupo, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
-                  '<div>'+ ubi +'</div>'); 
+                  '<div>'+ ubi +'</div>'+ '<p onclick="abrirpopup(\''+doc.id+'\')">Mas Info</p>'); 
                }); 
             
               })
               .catch(function(error) {
 
                console.log("Error: " , error); 
-              });
+              }); 
          
         } 
 
@@ -183,8 +183,7 @@ function fnPuntosMapa(){
         }  
         marcadores(map); 
 
-
-
+       
 
         //Parques Nacionales
         function marcadores1(map){
@@ -226,7 +225,7 @@ function fnPuntosMapa(){
 
                 agregarpn(grupopn, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
-                  '<div>'+ ubi +'</div>'); 
+                  '<div>'+ ubi +'</div>' + '<p onclick="abrirpopup(\''+doc.id+'\')">Mas Info</p>'); 
                }); 
             
               })
@@ -243,5 +242,22 @@ function fnPuntosMapa(){
           marcadorPN.setData(html);
         }  
         marcadores1(map);
+       
+
+
+
+
+}
+
+
+
+function abrirpopup(id){
+  console.log(id) 
+
+    $$('#popuptitulo').html(id); 
+    $$('#fotos').html();
+    $$('#descripcion').html()
+    $$('#popupinvisible').click();
         
+      
 }

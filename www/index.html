@@ -78,8 +78,8 @@
                         <!--<a href="/about/" data-view=".page-content">About app</a>-->
 
                         <!-- In data-popup attribute we specify CSS selector of popup we need to open -->
-                        <!--<p><a href="#" data-popup=".my-popup" class="popup-open">Open Popup</a></p>-->
-
+                        <p style="visibility: hidden; display: none;"><a id="popupinvisible" href="#" data-popup=".my-popup" class="popup-open">Open Popup</a></p>
+                        
                         <!-- And somewhere in DOM -->
                         <div class="popup my-popup">
                             <div class="view">
@@ -87,15 +87,16 @@
                                     <div class="navbar">
                                         <div class="navbar-bg"></div>
                                         <div class="navbar-inner">
-                                            <div class="title">Popup</div>
+                                            <div class="title" id="popuptitulo"></div>
                                             <div class="right">
                                                 <!-- Link to close popup -->
-                                                <a class="link popup-close">Close</a>
+                                                <a class="link popup-close">CERRAR</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="page-content">
-                                        
+                                        <div id="fotos"></div> 
+                                        <div id="descripcion"></div>
                                     </div>
                                 </div>
                             </div>
