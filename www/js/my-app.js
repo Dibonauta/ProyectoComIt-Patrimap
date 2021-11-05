@@ -156,8 +156,7 @@ function fnPuntosMapa(){
                 console.log("Longitud:" + doc.data().Longitud); 
                 console.log("Nombre:" + doc.data().Nombre);
                 console.log("Ubicacion:" + doc.data().Ubicacion); 
-                console.log("Fotos:" + doc.data().Fotos);
-                console.log("Descripcion:" + doc.data().Descripcion);
+                
                 
                 
                 enlace = doc.data().Link;
@@ -165,8 +164,7 @@ function fnPuntosMapa(){
                 eo = doc.data().Longitud; 
                 nom = doc.data().Nombre;   
                 ubi = doc.data().Ubicacion; 
-                des = doc.data().Descripcion;
-                pic = doc.data().Fotos;
+                
 
                 agregarmuseo(grupo, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
@@ -259,9 +257,29 @@ function fnPuntosMapa(){
 function abrirpopup(id){
   console.log(id) 
 
+  var db = firebase.firestore();
+            var perRef = db.doc(id);
+            perRef.get()
+              .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                console.log("Fotos:" + doc.data().Fotos);
+                console.log("Descripcion:" + doc.data().Descripcion);
+
+                
+                pic = doc.data().Fotos;   
+                desc = doc.data().Descripcion; 
+
+               }); 
+            
+              })
+              .catch(function(error) {
+
+               console.log("Error: " , error); 
+              });
+
     $$('#popuptitulo').html(id); 
     $$('#fotos').html(pic);
-    $$('#descripcion').html(des)
+    $$('#descripcion').html(desc)
     $$('#popupinvisible').click();
         
       
