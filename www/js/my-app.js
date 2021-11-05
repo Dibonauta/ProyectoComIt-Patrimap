@@ -258,17 +258,22 @@ function abrirpopup(id){
   console.log(id) 
 
   var db = firebase.firestore();
-            var perRef = db.doc(id);
-            perRef.get()
-              .then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
-                console.log("Fotos:" + doc.data().Fotos);
-                console.log("Descripcion:" + doc.data().Descripcion);
+            var perRef = db.collection("Museos").doc(id);
+              perRef.get()
+                .then(function(querySnapshot) {
+                  querySnapshot.forEach(function(doc) {
+                  console.log("Fotos:" + doc.data().Fotos);
+                  console.log("Descripcion:" + doc.data().Descripcion);
 
                 
-                pic = doc.data().Fotos;   
-                desc = doc.data().Descripcion; 
+                  pic = doc.data().Fotos;   
+                  desc = doc.data().Descripcion; 
+                    
 
+                  $$('#popuptitulo').html(id); 
+                  $$('#fotos').html(pic);
+                  $$('#descripcion').html(desc)
+                  $$('#popupinvisible').click();
                }); 
             
               })
@@ -277,10 +282,7 @@ function abrirpopup(id){
                console.log("Error: " , error); 
               });
 
-    $$('#popuptitulo').html(id); 
-    $$('#fotos').html(pic);
-    $$('#descripcion').html(desc)
-    $$('#popupinvisible').click();
+    
         
       
 }
