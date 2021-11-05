@@ -156,12 +156,17 @@ function fnPuntosMapa(){
                 console.log("Longitud:" + doc.data().Longitud); 
                 console.log("Nombre:" + doc.data().Nombre);
                 console.log("Ubicacion:" + doc.data().Ubicacion); 
-
+                console.log("Fotos:" + doc.data().Fotos);
+                console.log("Descripcion:" + doc.data().Descripcion);
+                
+                
                 enlace = doc.data().Link;
                 ns = doc.data().Latitud; 
                 eo = doc.data().Longitud; 
                 nom = doc.data().Nombre;   
                 ubi = doc.data().Ubicacion; 
+                des = doc.data().Descripcion;
+                pic = doc.data().Fotos;
 
                 agregarmuseo(grupo, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
@@ -255,9 +260,10 @@ function abrirpopup(id){
   console.log(id) 
 
     $$('#popuptitulo').html(id); 
-    $$('#fotos').html();
-    $$('#descripcion').html()
+    $$('#fotos').html(pic);
+    $$('#descripcion').html(des)
     $$('#popupinvisible').click();
         
       
 }
+
