@@ -228,7 +228,7 @@ function fnPuntosMapa(){
 
                 agregarpn(grupopn, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
-                  '<div>'+ ubi +'</div>' + '<p onclick="abrirpopup(\''+doc.id+'\')">Mas Info</p>'); 
+                  '<div>'+ ubi +'</div>' + '<p onclick="abrirpopupn(\''+doc.id+'\')">Mas Info</p>'); 
                }); 
             
               })
@@ -257,33 +257,95 @@ function fnPuntosMapa(){
 function abrirpopup(id){
   console.log(id) 
 
-  var db = firebase.firestore();
-            var perRef = db.collection("Museos").doc(id);
-              perRef.get()
-                .then(function(querySnapshot) {
-                  querySnapshot.forEach(function(doc) {
-                  console.log("Fotos:" + doc.data().Fotos);
-                  console.log("Descripcion:" + doc.data().Descripcion);
+  var pic = ""
+  var desc = ""
 
-                
+
+
+  var db = firebase.firestore();
+  var docRef = db.collection("Museos").doc(id);    
+  
+        docRef.get().then((doc) => {
+        if (doc.exists) {
+        console.log("Document data:", doc.data());
+        
+        
+        console.log("Fotos:" + doc.data().Fotos);
+        
+        
+        console.log("Descripcion:" + doc.data().Descripcion);
+    
+          
                   pic = doc.data().Fotos;   
                   desc = doc.data().Descripcion; 
-                    
+                  
+                  imagen = '<img src="'+pic+'" width="100%" alt="">'
 
                   $$('#popuptitulo').html(id); 
-                  $$('#fotos').html(pic);
+                  $$('#fotos').html(imagen);
                   $$('#descripcion').html(desc)
                   $$('#popupinvisible').click();
-               }); 
-            
-              })
-              .catch(function(error) {
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        }
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+          });
 
-               console.log("Error: " , error); 
-              });
+
+
+
+
+      
+    
 
     
         
       
+} 
+
+
+
+
+function abrirpopupn(id){
+  console.log(id) 
+
+  var pic = ""
+  var desc = ""
+
+
+
+  var db = firebase.firestore();
+  var docRef = db.collection("Parques Nacionales").doc(id);    
+  
+        docRef.get().then((doc) => {
+        if (doc.exists) {
+        console.log("Document data:", doc.data());
+        
+        
+        console.log("Fotos:" + doc.data().Fotos);
+        
+        
+        console.log("Descripcion:" + doc.data().Descripcion);
+    
+          
+                   pic = doc.data().Fotos;   
+                  desc = doc.data().Descripcion; 
+                    
+                  imagen = '<img src="'+pic+'" width="100%" alt="">'
+
+                  $$('#popuptitulo').html(id); 
+                  $$('#fotos').html(imagen);
+                  $$('#descripcion').html(desc)
+                  $$('#popupinvisible').click();
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        }
+      }).catch((error) => {
+          console.log("Error getting document:", error);
+          });
+
 }
 
