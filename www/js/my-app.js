@@ -270,19 +270,36 @@ function abrirpopup(id){
         console.log("Document data:", doc.data());
         
         
-        console.log("Fotos:" + doc.data().Fotos);
+        console.log("Fotos:" + doc.data().Foto1);
+        console.log("Fotos:" + doc.data().Foto2);
+        console.log("Fotos:" + doc.data().Foto3);
+        console.log("Fotos:" + doc.data().Foto4);
+        console.log("Fotos:" + doc.data().Foto5);
         
         
         console.log("Descripcion:" + doc.data().Descripcion);
     
           
-                  pic = doc.data().Fotos;   
+                  pic1 = doc.data().Foto1;
+                  pic2 = doc.data().Foto2;
+                  pic3 = doc.data().Foto3;
+                  pic4 = doc.data().Foto4;
+                  pic5 = doc.data().Foto5;   
+                  
                   desc = doc.data().Descripcion; 
                   
-                  imagen = '<img src="'+pic+'" width="100%" alt="">'
+                  imagen1 = '<img src="'+pic1+'" width="100%" alt="">'
+                  imagen2 = '<img src="'+pic2+'" width="100%" alt="">'
+                  imagen3 = '<img src="'+pic3+'" width="100%" alt="">'
+                  imagen4 = '<img src="'+pic4+'" width="100%" alt="">'
+                  imagen5 = '<img src="'+pic5+'" width="100%" alt="">'
 
                   $$('#popuptitulo').html(id); 
-                  $$('#fotos').html(imagen);
+                  $$('#foto1').html(imagen1); 
+                  $$('#foto2').html(imagen2);
+                  $$('#foto3').html(imagen3);
+                  $$('#foto4').html(imagen4);
+                  $$('#foto5').html(imagen5);
                   $$('#descripcion').html(desc)
                   $$('#popupinvisible').click();
         } else {
@@ -336,7 +353,11 @@ function abrirpopupn(id){
                   imagen = '<img src="'+pic+'" width="100%" alt="">'
 
                   $$('#popuptitulo').html(id); 
-                  $$('#fotos').html(imagen);
+                  $$('#foto1').html(imagen); 
+                  $$('#foto2').html(imagen);
+                  $$('#foto3').html(imagen);
+                  $$('#foto4').html(imagen);
+                  $$('#foto4').html(imagen);
                   $$('#descripcion').html(desc)
                   $$('#popupinvisible').click();
         } else {
