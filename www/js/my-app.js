@@ -69,7 +69,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 }) 
 
 function fnPuntosMapa(){
-    //Mapa
+//---------------------------------------------------------Mapa---------------------------------------------------------------------------
     platform = new H.service.Platform({
       'apikey': 'jxHbNasTU-AJ9dPFrehNs5dC7JtDW7hz-KjaiKcSb-0'
     });
@@ -92,7 +92,7 @@ function fnPuntosMapa(){
     	  //map.addObject(marker);
       	//map.setCenter(coords);  
 
-        //Movimiento del mapa
+//---------------------------------------------------Movimiento del mapa-----------------------------------------------------------
         var mapEvents = new H.mapevents.MapEvents(map);
         var behavior = new H.mapevents.Behavior(mapEvents); 
         
@@ -107,8 +107,8 @@ function fnPuntosMapa(){
         zoom.setAlignment('right-middle'); 
         
         
-        //iconos del mapa
-        var icon = new H.map.Icon('img/icono1.png') 
+//---------------------------------------------------iconos del mapa---------------------------------------------------------
+        /*var icon = new H.map.Icon('img/icono1.png')*/ 
         var iconoMuseo = new H.map.Icon('img/iconomuseo.png')
         var iconoPn = new H.map.Icon('img/iconopn.png')
         //var marker = new H.map.Marker({ lat: -32.845811, lng: -61.248997 }, {icon: icon});
@@ -117,6 +117,10 @@ function fnPuntosMapa(){
         
         //content: "--" + evt.target.getData()
 
+
+ 
+//--------------------------------------------------------PUNTOS--------------------------------------------------------------------------          
+        
         //Museos
         function marcadores(map){
 
@@ -136,7 +140,7 @@ function fnPuntosMapa(){
             // show info bubble
             ui.addBubble(bubble);
           }, false);        
-          
+
           //Museos
           
           /*/agregarmarcadoralgrupo(grupo, {lat:-32.845811, lng:-61.248997},
@@ -168,7 +172,7 @@ function fnPuntosMapa(){
 
                 agregarmuseo(grupo, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
-                  '<div>'+ ubi +'</div>'+ '<p onclick="abrirpopup(\''+doc.id+'\')">Mas Info</p>'); 
+                  '<div>'+ ubi +'</div>'+ '<h3 onclick="abrirpopup(\''+doc.id+'\')" style="cursor: pointer;">Mas Info</h3>'); 
                }); 
             
               })
@@ -228,7 +232,7 @@ function fnPuntosMapa(){
 
                 agregarpn(grupopn, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
-                  '<div>'+ ubi +'</div>' + '<p onclick="abrirpopupn(\''+doc.id+'\')">Mas Info</p>'); 
+                  '<div>'+ ubi +'</div>' + '<h3 onclick="abrirpopupn(\''+doc.id+'\')" style="cursor: pointer;">Mas Info</h3>'); 
                }); 
             
               })
@@ -254,10 +258,25 @@ function fnPuntosMapa(){
 
 
 
+
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------POPUPS----------------------------------------------------------------------//
+
+//Museos
 function abrirpopup(id){
   console.log(id) 
 
-  var pic = ""
+  var pic1 = ""
+  var pic2 = ""
+  var pic3 = ""
+  var pic4 = ""
   var desc = ""
 
 
@@ -288,11 +307,11 @@ function abrirpopup(id){
                   
                   desc = doc.data().Descripcion; 
                   
-                  imagen1 = '<img src="'+pic1+'" width="100%" alt="">'
-                  imagen2 = '<img src="'+pic2+'" width="100%" alt="">'
-                  imagen3 = '<img src="'+pic3+'" width="100%" alt="">'
-                  imagen4 = '<img src="'+pic4+'" width="100%" alt="">'
-                  imagen5 = '<img src="'+pic5+'" width="100%" alt="">'
+                  imagen1 = '<center><img src="'+pic1+'"  height="250" alt=""></center>'
+                  imagen2 = '<center><img src="'+pic2+'"  height="250" alt=""></center>'
+                  imagen3 = '<center><img src="'+pic3+'"  height="250" alt=""></center>'
+                  imagen4 = '<center><img src="'+pic4+'"  height="250" alt=""></center>'
+                  imagen5 = '<center><img src="'+pic5+'"  height="250" alt=""></center>'
 
                   $$('#popuptitulo').html(id); 
                   $$('#foto1').html(imagen1); 
@@ -324,7 +343,7 @@ function abrirpopup(id){
 
 
 
-
+//Parques Nacionales
 function abrirpopupn(id){
   console.log(id) 
 
@@ -340,24 +359,35 @@ function abrirpopupn(id){
         if (doc.exists) {
         console.log("Document data:", doc.data());
         
-        
-        console.log("Fotos:" + doc.data().Fotos);
+        console.log("Fotos:" + doc.data().Foto1);
+        console.log("Fotos:" + doc.data().Foto2);
+        console.log("Fotos:" + doc.data().Foto3);
+        console.log("Fotos:" + doc.data().Foto4);
+        console.log("Fotos:" + doc.data().Foto5);
         
         
         console.log("Descripcion:" + doc.data().Descripcion);
     
           
-                   pic = doc.data().Fotos;   
+                  pic1 = doc.data().Foto1;
+                  pic2 = doc.data().Foto2;
+                  pic3 = doc.data().Foto3;
+                  pic4 = doc.data().Foto4;
+                  pic5 = doc.data().Foto5; 
                   desc = doc.data().Descripcion; 
                     
-                  imagen = '<img src="'+pic+'" width="100%" alt="">'
+                  imagen1 = '<img src="'+pic1+'" height="250" alt="">'
+                  imagen2 = '<img src="'+pic2+'" height="250" alt="">'
+                  imagen3 = '<img src="'+pic3+'" height="250" alt="">'
+                  imagen4 = '<img src="'+pic4+'" height="250" alt="">'
+                  imagen5 = '<img src="'+pic5+'" height="250" alt="">'
 
                   $$('#popuptitulo').html(id); 
                   $$('#foto1').html(imagen); 
                   $$('#foto2').html(imagen);
                   $$('#foto3').html(imagen);
                   $$('#foto4').html(imagen);
-                  $$('#foto4').html(imagen);
+                  $$('#foto5').html(imagen);
                   $$('#descripcion').html(desc)
                   $$('#popupinvisible').click();
         } else {

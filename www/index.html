@@ -24,7 +24,7 @@
     <meta name="color-scheme" content="light dark">
 
     <!-- Your app title -->
-    <title>My App</title>
+    <title>Patrimaps</title>
     <!-- Path to Framework7 Library CSS -->
     <link rel="stylesheet" href="lib/framework7/framework7-bundle.min.css">
     <!-- Path to icons -->
@@ -42,6 +42,18 @@
 
 <body>
     <div id="app">
+        <div class="panel panel-left panel-cover panel-init" style="background-color: #121212;">
+            <div class="block"> 
+                <div class="navbar">
+                    <div class="navbar-bg"></div>
+                    <div class="navbar-inner">
+                        <div class="left"><i><img src="img\iconopatrimonio.png" alt=""></i></div>
+                        <div class="title titulazo">Patrimaps</div>
+                    </div>
+                </div>
+              <p>Esto es un Menu</p>
+            </div>
+    </div>
         <!-- Statusbar overlay -->
         <div class="statusbar"></div>
     
@@ -52,20 +64,12 @@
             <div class="navbar">
                 <div class="navbar-bg"></div>
                 <div class="navbar-inner">
-                    <div class="left"><i class="icon icon-back"></i></div>
-                    <div class="title">Page Title</div>
-                    <div class="right"><i class="icon icon-forward"></i></div>
+                    <div class="left"><i><img src="img\iconopatrimonio.png" alt=""></i></div>
+                    <div class="title titulazo">Patrimaps</div>
+                    <div class="right"><a href="#" class="button button-small panel-toggle display-flex" data-panel="left"><i><img src="img\iconomenu5.png" alt=""></i></a></div>
                 </div>
             </div>
     
-            <!-- Toolbar -->
-            <div class="toolbar toolbar-bottom">
-                <div class="toolbar-inner">
-                <!-- Toolbar links -->
-                <a href="#" class="link">Link 1</a>
-                <a href="#" class="link">Link 2</a>
-                </div>
-            </div>
         
         <!-- Initial Page, "data-name" contains page name -->
             <div data-name="index" class="page">
@@ -73,7 +77,7 @@
                 <div class="page-content medidas">
                     <div class="block">
                         <!-- Link to another page --> 
-                        <div style="width: 100%; height: 75vh; border:2px outset #000;" id="mapContainer"></div>
+                        <div style="width: 100%; height: 85vh; border:2px outset #000;" id="mapContainer"></div>
 
                         <!--<a href="/about/" data-view=".page-content">About app</a>-->
 
@@ -96,7 +100,7 @@
                                     </div>
                                     <div class="page-content">
                                         <!--<div id="fotos"></div>-->
-                                        <div class="block-title">Fotos</div>
+                                        <div class="block-title" style="margin-top: 10px">Fotos</div>
                                         <div
                                             data-pagination='{"el": ".swiper-pagination"}'
                                             data-space-between="50"
@@ -119,7 +123,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 
