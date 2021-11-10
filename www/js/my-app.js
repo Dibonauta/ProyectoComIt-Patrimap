@@ -376,18 +376,18 @@ function abrirpopupn(id){
                   pic5 = doc.data().Foto5; 
                   desc = doc.data().Descripcion; 
                     
-                  imagen1 = '<img src="'+pic1+'" height="250" alt="">'
-                  imagen2 = '<img src="'+pic2+'" height="250" alt="">'
-                  imagen3 = '<img src="'+pic3+'" height="250" alt="">'
-                  imagen4 = '<img src="'+pic4+'" height="250" alt="">'
-                  imagen5 = '<img src="'+pic5+'" height="250" alt="">'
+                  imagen1 = '<center><img src="'+pic1+'" height="250" alt=""></center>'
+                  imagen2 = '<center><img src="'+pic2+'" height="250" alt=""></center>'
+                  imagen3 = '<center><img src="'+pic3+'" height="250" alt=""></center>'
+                  imagen4 = '<center><img src="'+pic4+'" height="250" alt=""></center>'
+                  imagen5 = '<center><img src="'+pic5+'" height="250" alt=""></center>'
 
                   $$('#popuptitulo').html(id); 
-                  $$('#foto1').html(imagen); 
-                  $$('#foto2').html(imagen);
-                  $$('#foto3').html(imagen);
-                  $$('#foto4').html(imagen);
-                  $$('#foto5').html(imagen);
+                  $$('#foto1').html(imagen1); 
+                  $$('#foto2').html(imagen2);
+                  $$('#foto3').html(imagen3);
+                  $$('#foto4').html(imagen4);
+                  $$('#foto5').html(imagen5);
                   $$('#descripcion').html(desc)
                   $$('#popupinvisible').click();
         } else {
