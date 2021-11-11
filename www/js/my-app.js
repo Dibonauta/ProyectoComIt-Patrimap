@@ -18,10 +18,8 @@ var app = new Framework7({
     },
     // Add default routes
     routes: [
-      {
-        path: '/about/',
-        url: 'about.html',
-      },
+      {path: '/registro/', url: 'registro.html',},
+      {path: '/index/', url: 'index.html',},
     ]
     // ... other parameters
   });
@@ -66,6 +64,11 @@ $$(document).on('page:init', function (e) {
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     // Do something here when page with data-name="index" attribute loaded and initialized
            
+}) 
+
+$$(document).on('page:init', '.page[data-name="registro"]', function (e) {
+  // Do something here when page with data-name="index" attribute loaded and initialized
+         
 }) 
 
 function fnPuntosMapa(){
