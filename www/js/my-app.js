@@ -68,6 +68,8 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   }
 
   navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+  $$('#btf').on('click', fnAgregaFav)
 }) 
 
 $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
@@ -245,7 +247,8 @@ function fnPuntosMapa(){
                 agregarpn(grupopn, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
                   '<div>'+ ubi +'</div>' + '<h3 onclick="abrirpopupn(\''+doc.id+'\')" style="cursor: pointer;">Mas Info</h3>'); 
-               }); 
+               
+                }); 
             
               })
               .catch(function(error) {
@@ -521,4 +524,17 @@ function fnIngresoUsuario() {
         
       });  
 
+} 
+
+
+
+//-----------------------------------------------------------algo flota en la laguna------------------------------------------------------------------------
+
+function fnAgregaFav(){
+  
+  if ( $$('#btf').hasClass('button-outline') ) {
+   $$('#btf').removeClass('button-outline').addClass('button-fill').html('❤');
+ } else {
+   $$('#btf').removeClass('button-fill').addClass('button-outline').html('🤍');
+ }
 }
