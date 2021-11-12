@@ -34,6 +34,17 @@ var coleccionUsuarios = db.collection("USUARIOS");
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!"); 
+  });
+
+// Option 1. Using one 'page:init' handler for all pages
+$$(document).on('page:init', function (e) {
+    // Do something here when page loaded and initialized
+    console.log(e);  
+})
+
+// Option 2. Using live 'page:init' event handlers for each page
+$$(document).on('page:init', '.page[data-name="index"]', function (e) {
+    // Do something here when page with data-name="index" attribute loaded and initialized
     var onSuccess = function(position) {
       /*/console.log('Latitude: '          + position.coords.latitude          + '\n' +
             'Longitude: '         + position.coords.longitude         + '\n' +
@@ -57,17 +68,6 @@ $$(document).on('deviceready', function() {
   }
 
   navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  });
-
-// Option 1. Using one 'page:init' handler for all pages
-$$(document).on('page:init', function (e) {
-    // Do something here when page loaded and initialized
-    console.log(e);  
-})
-
-// Option 2. Using live 'page:init' event handlers for each page
-$$(document).on('page:init', '.page[data-name="index"]', function (e) {
-    // Do something here when page with data-name="index" attribute loaded and initialized
 }) 
 
 $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
