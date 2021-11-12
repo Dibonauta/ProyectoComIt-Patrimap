@@ -18,13 +18,18 @@ var app = new Framework7({
     },
     // Add default routes
     routes: [
-      {path: '/registro/', url: 'registro.html',},
       {path: '/index/', url: 'index.html',},
+      {path: '/registro/', url: 'registro.html',},
+      {path: '/login/', url: 'login.html',},
     ]
     // ... other parameters
   });
 
 var mainView = app.views.create('.view-main');
+
+var db = firebase.firestore();
+var coleccionUsuarios = db.collection("USUARIOS");
+
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -63,12 +68,16 @@ $$(document).on('page:init', function (e) {
 // Option 2. Using live 'page:init' event handlers for each page
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     // Do something here when page with data-name="index" attribute loaded and initialized
-           
 }) 
 
 $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
   // Do something here when page with data-name="index" attribute loaded and initialized
-         
+    $$('#registro').on('click', fnNuevoUsuario)   
+}) 
+
+$$(document).on('page:init', '.page[data-name="login"]', function (e) {
+  // Do something here when page with data-name="index" attribute loaded and initialized
+    $$('#ingresar').on('click', fnIngresoUsuario);
 }) 
 
 function fnPuntosMapa(){
@@ -403,3 +412,113 @@ function abrirpopupn(id){
 
 }
 
+//----------------------------------------------------REGISTRO-------------------------------------------------------------------
+
+function fnNuevoUsuario() {
+  
+      nombre    = $$('#nombre').val();
+      apellido  = $$('#apellido').val();
+      email     = $$('#Email').val();
+      password  = $$('#contra1').val();
+      
+      console.log (nombre);
+      console.log (apellido);
+      console.log (email);
+      console.log (password);
+     
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Usuario creado. Agregar datos a la base de datos
+          var datosUsuario = {
+              Nombre: nombre,
+              Apellido: apellido,
+              Email: email,
+              Password: password,
+              tipoUsuario: "Usuario",
+          }
+          coleccionUsuarios.doc(email).set(datosUsuario)
+              .then(function() {     // .then((docRef) => {
+                console.log("BD OK!");
+                mainView.router.navigate('/login/');
+              })
+              .catch(function(error) {     // .catch((error) => {
+                console.log("Error: " + error);
+              });
+        })
+        .catch((error) => {   // error en AUTH
+          var errorCode    = error.code;
+          var errorMessage = error.message;
+          console.error(errorCode);
+          console.error(errorMessage);
+          if (errorCode == "auth/email-already-in-use") {
+              console.error("email ya en uso");
+              $$('#msgError').html("Este E-mail ya se encuentra en uso");
+          }
+          // ..
+        });
+  }
+
+//----------------------------------------------------------LOGIN------------------------------------------------------------------------- 
+var nombre, apellido, email, tipoUsuario;
+
+
+function fnIngresoUsuario() {
+
+    email = $$('#IEmail').val();
+    password =  $$('#IPassword').val();
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+
+        console.log("Bienvenid@!!! " + email);
+        // traer los datos de la base de datos de ESTE usuario en particular
+
+        docRef = coleccionUsuarios.doc(email)
+
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data());
+                    nombre = doc.data().nombre;
+                    apellido = doc.data().apellido;
+                    tipoUsuario = doc.data().tipoUsuario;
+
+
+                    if (tipoUsuario == "Usuario") {
+                        console.log("ya te logueaste");
+                         mainView.router.navigate('/index/');
+                    } else {
+                        console.log("admin B)");
+                    }
+
+
+
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+
+
+
+
+
+
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        console.error(errorCode);
+        console.error(errorMessage);
+        if (errorCode == "auth/wrong-password") {
+          console.error("Contraseña incorrecta");
+          $$('#msgErrorContra').html("Contraseña incorrecta");
+      }
+        
+      });  
+
+}
