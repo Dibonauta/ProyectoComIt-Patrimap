@@ -30,6 +30,7 @@ var mainView = app.views.create('.view-main');
 
 var db = firebase.firestore();
 var coleccionUsuarios = db.collection("USUARIOS"); 
+var coleccionFavs = db.collection("Favoritos");
 
 
 
@@ -66,12 +67,13 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   //
   function onError(error) {
       alert('code: '    + error.code    + '\n' +
-            'message: ' + error.message + '\n');
+            'message: ' + error.message + '\n'); 
   }
 
   navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
   $$('#btf').on('click', fnAgregaFav) 
+  $$('#ingresar').on('click', fnApareceEsto);
 }) 
 
 $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
@@ -82,7 +84,7 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
 $$(document).on('page:init', '.page[data-name="login"]', function (e) {
   // Do something here when page with data-name="index" attribute loaded and initialized
     $$('#ingresar').on('click', fnIngresoUsuario); 
-    $$('#ingresar').on('click', fnApareceEsto);
+    //$$('#ingresar').on('click', fnApareceEsto);
     $$('#ingresar').on('click', fnAu);
     $$('#ingresar').on('click', fnAr);
     $$('#ingresar').on('click', fnAl);
@@ -92,6 +94,9 @@ $$(document).on('page:init', '.page[data-name="perfil"]', function (e) {
   // Do something here when page with data-name="index" attribute loaded and initialized
   fnPerfilUsuario()
 }) 
+
+var usuarioAutenticado = 0
+
 
 function fnPuntosMapa(){
 //---------------------------------------------------------Mapa---------------------------------------------------------------------------
@@ -198,7 +203,7 @@ function fnPuntosMapa(){
 
                 agregarmuseo(grupo, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
-                  '<div>'+ ubi +'</div>'+ '<h3 onclick="abrirpopup(\''+doc.id+'\')" style="cursor: pointer;">Mas Info</h3>'); 
+                  '<div>'+ ubi +'</div>'+ '<h3 onclick="abrirpopup(\''+doc.id+'\');fnApareceEsto();fnAgregaFav()" style="cursor: pointer;">Mas Info</h3>'); 
                }); 
             
               })
@@ -258,7 +263,7 @@ function fnPuntosMapa(){
 
                 agregarpn(grupopn, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
-                  '<div>'+ ubi +'</div>' + '<h3 onclick="abrirpopupn(\''+doc.id+'\')" style="cursor: pointer;">Mas Info</h3>'); 
+                  '<div>'+ ubi +'</div>' + '<h3 onclick="abrirpopupn(\''+doc.id+'\');fnApareceEsto();fnAgregaFav()" style="cursor: pointer;">Mas Info</h3>'); 
                
                 }); 
             
@@ -319,7 +324,7 @@ function fnPuntosMapa(){
 
                 agregarpa(grupopa, {lat: ns, lng: eo},
                   '<div><a class="external" target="_blank" href="'+ enlace +'">'+ nom +'</a></div>' +
-                  '<div>'+ ubi +'</div>' + '<h3 onclick="abrirpopupa(\''+doc.id+'\')" style="cursor: pointer;">Mas Info</h3>'); 
+                  '<div>'+ ubi +'</div>' + '<h3 onclick="abrirpopupa(\''+doc.id+'\');fnApareceEsto();fnAgregaFav()" style="cursor: pointer;">Mas Info</h3>'); 
                
                 }); 
             
@@ -595,7 +600,7 @@ function fnIngresoUsuario() {
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
-
+        usuarioAutenticado = 1
         console.log("Bienvenid@!!! " + email);
         // traer los datos de la base de datos de ESTE usuario en particular
 
@@ -649,21 +654,22 @@ function fnIngresoUsuario() {
 //-----------------------------------------------------------algo flota en la laguna------------------------------------------------------------------------
 
 function fnApareceEsto(){
-    $$('#btf').removeClass('vr').addClass('seve');
+    if ( usuarioAutenticado == 1 ) {
+      $$('#btf').removeClass('vr').addClass('seve');
+    } else {
+      $$('#btf').removeClass('seve').addClass('vr');
+     }
   }
 
 
-
 function fnAgregaFav(){
-  
-  if ( $$('#btf').hasClass('button-outline') ) {
-   $$('#btf').removeClass('button-outline').addClass('button-fill').html('❤');
+  esto = this.id
+  if ( $$(this.id).hasClass('botonfav')) {
+   $$(this.id).removeClass('button-outline').addClass('button-fill').html('❤');
  } else {
-   $$('#btf').removeClass('button-fill').addClass('button-outline').html('🤍');
+   $$(this.id).removeClass('button-fill').addClass('button-outline').html('🤍');
  }
-}   
-
-
+}
 
 //--------------------------------------------------------Perfil---------------------------------------------------------------------------
 
@@ -705,6 +711,10 @@ function fnPerfilUsuario(){
   console.log("Error getting document:", error);
   });
 }
+
+
+
+
 
 
 
