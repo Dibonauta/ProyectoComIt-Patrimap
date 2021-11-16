@@ -69,7 +69,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
   navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
-  $$('#btf').on('click', fnAgregaFav)
+  $$('#btf').on('click', fnAgregaFav) 
 }) 
 
 $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
@@ -79,7 +79,8 @@ $$(document).on('page:init', '.page[data-name="registro"]', function (e) {
 
 $$(document).on('page:init', '.page[data-name="login"]', function (e) {
   // Do something here when page with data-name="index" attribute loaded and initialized
-    $$('#ingresar').on('click', fnIngresoUsuario);
+    $$('#ingresar').on('click', fnIngresoUsuario); 
+    $$('#ingresar').on('click', fnApareceEsto);
 }) 
 
 function fnPuntosMapa(){
@@ -494,8 +495,8 @@ function fnIngresoUsuario() {
                     } else {
                         console.log("admin B)");
                     }
-
-
+                    
+                   
 
                 } else {
                     // doc.data() will be undefined in this case
@@ -504,11 +505,6 @@ function fnIngresoUsuario() {
             }).catch((error) => {
                 console.log("Error getting document:", error);
             });
-
-
-
-
-
 
       })
       .catch((error) => {
@@ -524,11 +520,23 @@ function fnIngresoUsuario() {
         
       });  
 
+      
+
 } 
 
 
 
 //-----------------------------------------------------------algo flota en la laguna------------------------------------------------------------------------
+
+function fnApareceEsto(){
+  if ( $$('#btf').hasClass('vr') ) {
+    $$('#btf').removeClass('vr').addClass('seve');
+  } else {
+    $$('#btf').removeClass('seve').addClass('vr');
+  }
+}
+
+
 
 function fnAgregaFav(){
   
@@ -537,4 +545,7 @@ function fnAgregaFav(){
  } else {
    $$('#btf').removeClass('button-fill').addClass('button-outline').html('🤍');
  }
-}
+}  
+
+
+

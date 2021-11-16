@@ -101,4 +101,12 @@ hr{
 } 
 .brf{
   width: 25%; 
+} 
+
+.vr{
+  visibility: hidden;
+}
+
+.seve{
+  visibility: visible;
 }
